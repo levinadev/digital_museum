@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Свет и форма — Digital Museum</title>
+
+  <!-- Единственный внешний ресурс — шрифт для заголовков -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Первый экран -->
+  <header class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+
+    <nav class="topbar">
+      <span class="logo">Digital Museum</span>
+      <span class="topbar-note">Выставка · 2026</span>
+    </nav>
+
+    <div class="hero-content">
+      <p class="eyebrow">Виртуальная выставка цифрового искусства</p>
+      <h1 class="hero-title">Свет <em>и</em> форма</h1>
+      <p class="hero-subtitle">Двенадцать работ о том, как геометрия, свет и движение становятся образом.</p>
+      <button class="hero-button" id="start" type="button">Смотреть выставку</button>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true"></div>
+  </header>
+
+  <!-- Галерея -->
+  <main class="gallery" id="gallery">
+    <div class="gallery-head">
+      <h2 class="gallery-title">Экспозиция</h2>
+      <div class="filters" id="filters" role="toolbar" aria-label="Категории"></div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer class="footer">
+    <p>Все произведения нарисованы кодом. Авторы вымышлены.</p>
+  </footer>
+
+  <!-- Окно просмотра работы -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" type="button" aria-label="Закрыть">&times;</button>
+
+      <div class="modal-art" id="modal-art"></div>
+
+      <div class="modal-info">
+        <p class="modal-category" id="modal-category"></p>
+        <h3 class="modal-title" id="modal-title"></h3>
+        <p class="modal-author" id="modal-author"></p>
+        <p class="modal-text" id="modal-text"></p>
+
+        <div class="modal-nav">
+          <button class="nav-button" id="prev" type="button" aria-label="Предыдущая работа">&larr;</button>
+          <span class="modal-counter" id="counter"></span>
+          <button class="nav-button" id="next" type="button" aria-label="Следующая работа">&rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

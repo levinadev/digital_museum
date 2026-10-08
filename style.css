@@ -1,0 +1,479 @@
+/* ===== Цвета и шрифты ===== */
+:root {
+  --bg: #08080c;
+  --bg-soft: #111118;
+  --text: #f3efe6;
+  --muted: #9a968e;
+  --line: rgba(243, 239, 230, 0.14);
+  --gold: #e0b973;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+
+/* ===== Первый экран ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: 28px clamp(20px, 5vw, 64px);
+  overflow: hidden;
+}
+
+/* Мягкие цветные пятна света на фоне */
+.hero-glow {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 25% 35%, rgba(224, 185, 115, 0.22), transparent 40%),
+    radial-gradient(circle at 75% 60%, rgba(91, 139, 184, 0.22), transparent 42%),
+    radial-gradient(circle at 55% 20%, rgba(200, 107, 250, 0.14), transparent 35%);
+  filter: blur(20px);
+  animation: drift 18s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-4%, 3%) scale(1.08); }
+}
+
+.topbar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.logo {
+  color: var(--text);
+}
+
+.hero-content {
+  position: relative;
+  margin: auto 0;
+  max-width: 900px;
+  animation: rise 1.2s var(--ease) both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(64px, 14vw, 180px);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-subtitle {
+  margin-top: 40px;
+  max-width: 520px;
+  font-size: clamp(16px, 2vw, 19px);
+  color: var(--muted);
+}
+
+.hero-button {
+  margin-top: 40px;
+  padding: 16px 34px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(6px);
+  transition: background 0.4s var(--ease), border-color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.hero-button:hover {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+  transform: translateY(-2px);
+}
+
+/* Анимированная линия «листайте вниз» */
+.scroll-hint {
+  position: relative;
+  align-self: center;
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(var(--text), transparent);
+  opacity: 0.5;
+  animation: hint 2.4s ease-in-out infinite;
+}
+
+@keyframes hint {
+  0%, 100% { transform: scaleY(0.4); transform-origin: top; }
+  50%      { transform: scaleY(1);   transform-origin: top; }
+}
+
+/* ===== Галерея ===== */
+.gallery {
+  padding: clamp(64px, 10vw, 120px) clamp(20px, 5vw, 64px);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.gallery-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 48px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.gallery-title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 1;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter {
+  padding: 8px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 14px;
+  color: var(--muted);
+  transition: color 0.3s, background 0.3s, border-color 0.3s;
+}
+
+.filter:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+
+.filter.is-active {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg);
+}
+
+/* Сетка: 3 колонки → 2 → 1 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+}
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* ===== Карточка ===== */
+.card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  /* Сначала карточка скрыта — появляется при прокрутке */
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  transition-delay: var(--delay, 0s);
+}
+
+.card[hidden] {
+  display: none;
+}
+
+.card.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Плавное исчезновение при смене фильтра */
+.card.is-visible.is-hiding {
+  opacity: 0;
+  transform: scale(0.96);
+  transition-duration: 0.25s;
+  transition-delay: 0s;
+}
+
+.card-frame {
+  display: block;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--bg-soft);
+  transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
+}
+
+.card-frame svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  transition: transform 1.2s var(--ease);
+}
+
+/* При наведении — увеличиваем и подсвечиваем цветом работы */
+.card:hover .card-frame,
+.card:focus-visible .card-frame {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 24px 60px -20px var(--accent), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.card:hover .card-frame svg {
+  transform: scale(1.06);
+}
+
+.card:focus-visible {
+  outline: none;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  padding-top: 18px;
+}
+
+.card-title {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.card-meta {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ===== Подвал ===== */
+.footer {
+  padding: 48px 20px 64px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+}
+
+/* ===== Окно просмотра ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0px, 3vw, 40px);
+  background: rgba(5, 5, 8, 0.86);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s var(--ease), visibility 0.4s;
+}
+
+.modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-dialog {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+  width: 100%;
+  max-width: 1100px;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: clamp(20px, 4vw, 48px);
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  transform: translateY(20px) scale(0.98);
+  transition: transform 0.5s var(--ease);
+}
+
+.modal.is-open .modal-dialog {
+  transform: none;
+}
+
+.modal-art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 75vh;
+  aspect-ratio: 4 / 5;
+  border-radius: 4px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--muted);
+  transition: color 0.3s, transform 0.3s;
+}
+
+.modal-close:hover {
+  color: var(--text);
+  transform: rotate(90deg);
+}
+
+.modal-category {
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.modal-title {
+  margin-top: 12px;
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.05;
+}
+
+.modal-author {
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+.modal-text {
+  margin-top: 24px;
+  font-size: 17px;
+  max-width: 440px;
+}
+
+.modal-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.nav-button {
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: 20px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-button:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.modal-counter {
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+/* На телефоне окно — на весь экран, картина сверху */
+@media (max-width: 760px) {
+  .modal-dialog {
+    grid-template-columns: 1fr;
+    align-items: start;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+    padding-top: 60px;
+  }
+
+  .modal-art svg {
+    max-height: 55vh;
+    margin: 0 auto;
+  }
+
+  .modal-nav {
+    margin-top: 28px;
+    margin-bottom: 12px;
+  }
+}
+
+/* ===== Если пользователь попросил меньше анимаций ===== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .card {
+    opacity: 1;
+    transform: none;
+  }
+}
